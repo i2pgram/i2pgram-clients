@@ -151,6 +151,30 @@ cd gyp
 git checkout 702ac58e47
 git apply ../../tdesktop/Telegram/Patches/gyp.diff
 cd ..
+git clone https://chromium.googlesource.com/breakpad/breakpad
+cd breakpad
+git checkout bc8fb886
+git clone https://chromium.googlesource.com/linux-syscall-support src/third_party/lss
+cd src/third_party/lss
+git checkout a91633d1
+cd ../../..
+./configure
+make $MAKE_THREADS_CNT
+sudo make install
+cd src
+rm -r testing
+git clone https://github.com/google/googletest testing
+cd tools
+echo "old tools.gyp: [`cat tools.gyp`]"
+sed -i "s/gypi...$/gypi'],'cxxflags':['-std=c++11'],/" tools.gyp 
+echo "new tools.gyp: [`cat tools.gyp`]"
+sed -i 's/minidump_upload.m/minidump_upload.cc/' linux/tools_linux.gypi
+../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake
+cd ../../out/Default
+echo "gcc --version: `gcc --version|head -1`"
+cmake .
+make $MAKE_THREADS_CNT dump_syms
+cd ../../..
 ```
 
 TBD
