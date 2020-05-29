@@ -52,12 +52,6 @@ zlib1g-dev yasm cmake xutils-dev bison python-xcbgen
 
 export MAKE_THREADS_CNT=-j$(nproc)
 
-git clone --recursive https://github.com/nebula-chat-fork-originals/tdesktop.git 
-cd tdesktop
-git checkout dc8abc74ed4d72a73315550b91283ff1f2e44199
-git reset --hard
-cd ..
-
 cd Libraries
 
 git clone https://github.com/ericniebler/range-v3
@@ -203,6 +197,35 @@ echo "gcc --version: `gcc --version|head -1`"
 cmake .
 make $MAKE_THREADS_CNT dump_syms
 cd ../../..
+```
+
+Then, patch and build:
+
+```
+cd ~/git/
+
+git clone --recursive https://github.com/nebula-chat-fork-originals/tdesktop.git 
+cd tdesktop
+git checkout dc8abc74ed4d72a73315550b91283ff1f2e44199
+git reset --hard
+cd ..
+
+cd tdesktop
+
+git submodule init
+git submodule sync
+git submodule update
+
+echo "patching"
+
+git apply ~/git/i2pgram-clients/tdesktop/config.h.diff
+git apply ~/git/i2pgram-clients/tdesktop/dc_options.cpp.diff
+git apply ~/git/i2pgram-clients/tdesktop/launcher_linux.cpp.diff
+git apply ~/git/i2pgram-clients/tdesktop/launcher_mac.mm.diff
+git apply ~/git/i2pgram-clients/tdesktop/launcher_win.cpp.diff
+git apply ~/git/i2pgram-clients/tdesktop/telegram_mac.gypi.diff
+git apply ~/git/i2pgram-clients/tdesktop/update_checker.cpp.diff
+            
 ```
 
 TBD
