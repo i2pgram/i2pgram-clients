@@ -5,21 +5,23 @@
 1. Install Ubuntu 14.04 into virtualbox vm with 300GB storage on disk
 2. In a terminal,
 
-$ `sudo apt-get install git`
-$ `ssh-keygen -C i2gram_build_vm_github_key`
+```
+$ sudo apt-get install git
+$ ssh-keygen -C i2gram_build_vm_github_key
 Generating public/private rsa key pair.
-Enter file in which to save the key (`/home/user/.ssh/id_rsa`): `/home/user/.ssh/i2gram_build_vm_github_key`
-$ `cat ~/.ssh/i2gram_build_vm_github_key.pub` 
+Enter file in which to save the key (/home/user/.ssh/id_rsa): /home/user/.ssh/i2gram_build_vm_github_key
+$ cat ~/.ssh/i2gram_build_vm_github_key.pub
 ssh-rsa ... i2gram_build_vm_github_key
+```
 
 3. Paste the public key into GitHub's https://github.com/settings/ssh/new with the title i2pgram_build_vm_github_key.
 4. In a terminal,
 
-$ `cd && mkdir git && cd git`
-$ `git clone git@github.com:i2pgram/i2pgram-clients.git`
-$ `sudo bash`
-
 ```
+$ cd && mkdir git && cd git
+$ git clone git@github.com:i2pgram/i2pgram-clients.git
+$ sudo bash
+
 cfgFile="/etc/dpkg/dpkg.cfg.d/no_man"
 sudo touch $cfgFile
 p() {
