@@ -225,6 +225,22 @@ git apply ~/git/i2pgram-clients/tdesktop/launcher_mac.mm.diff
 git apply ~/git/i2pgram-clients/tdesktop/launcher_win.cpp.diff
 git apply ~/git/i2pgram-clients/tdesktop/telegram_mac.gypi.diff
 git apply ~/git/i2pgram-clients/tdesktop/update_checker.cpp.diff
+
+echo "patched"
+
+cd ~/git/tdesktop/Telegram
+
+# test credentials specified at tdesktop/Telegram/gyp/generate.py
+# Test credentials are documented with:
+# "Your users will start getting internal server errors on login
+# if you deploy an app using those 'api_id' and 'api_hash'."
+gyp/refresh.sh --api-id 17349 --api-hash 344583e45741c457fe1862106095a5eb
+
+export HomePath=~/git
+
+echo "building tdesktop"
+cd $HomePath/tdesktop/out/Debug
+make $MAKE_THREADS_CNT
             
 ```
 
