@@ -4,7 +4,7 @@
 
 1. install ubuntu 14.04 into virtualbox vm with 300GB storage on disk
 
-TDB
+TBD
 
 sudo bash
 
