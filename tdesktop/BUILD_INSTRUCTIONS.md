@@ -159,9 +159,73 @@ git clone https://chromium.googlesource.com/linux-syscall-support src/third_part
 cd src/third_party/lss
 git checkout a91633d1
 cd ../../..
+```
+
+TBD
+
+Then, patch ~/git/Libraries/breakpad/src/tools/linux/tools_linux.gypi:
+
+```
+# git diff -- tools_linux.gypi
+diff --git a/src/tools/linux/tools_linux.gypi b/src/tools/linux/tools_linux.gypi
+index 1c15992..98579e6 100644
+--- a/src/tools/linux/tools_linux.gypi
++++ b/src/tools/linux/tools_linux.gypi
+@@ -31,6 +31,11 @@
+     'include_dirs': [
+       '../..',
+     ],
++    'conditions': [
++      ['OS=="linux"', {
++        'cflags': ['-std=c++0x'],
++      }],
++    ]
+   },
+   'targets': [
+     {
+diff --git a/src/tools/tools.gyp b/src/tools/tools.gyp
+index e6a4210..33c81ea 100644
+--- a/src/tools/tools.gyp
++++ b/src/tools/tools.gyp
+@@ -29,10 +29,10 @@
+ {
+   'conditions': [
+     ['OS=="mac"', {
+-      'includes': ['mac/tools_mac.gypi'],
++      'includes': ['mac/tools_mac.gypi'],'cxxflags':['-std=c++11'],
+     }],
+     ['OS=="linux"', {
+-      'includes': ['linux/tools_linux.gypi'],
++      'includes': ['linux/tools_linux.gypi'],'cxxflags':['-std=c++0x'],
+```
+
+Then,
+
+```
+cd ~/git/Libraries/breakpad/
 ./configure
 make $MAKE_THREADS_CNT
 sudo make install
+
+cd src
+rm -r testing
+git clone https://github.com/google/googletest testing
+cd tools
+echo "old tools.gyp: [`cat tools.gyp`]"
+# sed -i "s/gypi...$/gypi'],'cxxflags':['-std=c++11'],/" tools.gyp 
+sed -i 's/minidump_upload.m/minidump_upload.cc/' linux/tools_linux.gypi
+echo "new tools.gyp: [`cat tools.gyp`]"
+
+../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake
+cd ../../out/Default
+echo "gcc --version: `gcc --version|head -1`"
+cmake .
+make $MAKE_THREADS_CNT dump_syms
+cd ../../..
+
+
+
+            
 cd src/tools
 ../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake
 cd ../../out/Default
