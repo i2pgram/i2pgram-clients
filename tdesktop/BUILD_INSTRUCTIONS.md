@@ -159,49 +159,6 @@ git clone https://chromium.googlesource.com/linux-syscall-support src/third_part
 cd src/third_party/lss
 git checkout a91633d1
 cd ../../..
-```
-
-TBD
-
-Then, patch ~/git/Libraries/breakpad/src/tools/linux/tools_linux.gypi:
-
-```
-# git diff -- tools_linux.gypi
-diff --git a/src/tools/linux/tools_linux.gypi b/src/tools/linux/tools_linux.gypi
-index 1c15992..98579e6 100644
---- a/src/tools/linux/tools_linux.gypi
-+++ b/src/tools/linux/tools_linux.gypi
-@@ -31,6 +31,11 @@
-     'include_dirs': [
-       '../..',
-     ],
-+    'conditions': [
-+      ['OS=="linux"', {
-+        'cflags': ['-std=c++0x'],
-+      }],
-+    ]
-   },
-   'targets': [
-     {
-diff --git a/src/tools/tools.gyp b/src/tools/tools.gyp
-index e6a4210..33c81ea 100644
---- a/src/tools/tools.gyp
-+++ b/src/tools/tools.gyp
-@@ -29,10 +29,10 @@
- {
-   'conditions': [
-     ['OS=="mac"', {
--      'includes': ['mac/tools_mac.gypi'],
-+      'includes': ['mac/tools_mac.gypi'],'cxxflags':['-std=c++11'],
-     }],
-     ['OS=="linux"', {
--      'includes': ['linux/tools_linux.gypi'],
-+      'includes': ['linux/tools_linux.gypi'],'cxxflags':['-std=c++0x'],
-```
-
-Then,
-
-```
 cd ~/git/Libraries/breakpad/
 ./configure
 make $MAKE_THREADS_CNT
@@ -218,22 +175,34 @@ echo "new tools.gyp: [`cat tools.gyp`]"
 
 ../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake
 cd ../../out/Default
+```
+
+Then, patch `CMakeLists.txt` (insert line `set(CMAKE_CXX_FLAGS '-std=c++11')`) as:
+
+```
+cmake_minimum_required(VERSION 2.8.8 FATAL_ERROR)
+cmake_policy(VERSION 2.8.8)
+project(common_unittests)
+set(configuration "Default")
+enable_language(ASM)
+set(builddir "${CMAKE_CURRENT_BINARY_DIR}")
+set(obj "${builddir}/obj")
+
+set(CMAKE_C_OUTPUT_EXTENSION_REPLACE 1)
+set(CMAKE_CXX_OUTPUT_EXTENSION_REPLACE 1)
+
+set(CMAKE_NINJA_FORCE_RESPONSE_FILE 1)
+
+set(CMAKE_CXX_FLAGS '-std=c++11')
+```
+
+Then,
+
+```
 echo "gcc --version: `gcc --version|head -1`"
 cmake .
 make $MAKE_THREADS_CNT dump_syms
 cd ../../..
-
-
-
-            
-cd src/tools
-../../../gyp/gyp  --depth=. --generator-output=.. -Goutput_dir=../out tools.gyp --format=cmake
-cd ../../out/Default
-cmake .
-make $MAKE_THREADS_CNT dump_syms
-cd ../../..
-
-
 ```
 
 TBD
