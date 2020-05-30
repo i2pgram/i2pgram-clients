@@ -254,4 +254,8 @@ sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 60 && \
 sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 60 && \
 sudo update-alternatives --config gcc && \
 sudo add-apt-repository --remove ppa:ubuntu-toolchain-r/test -y
+
+# pwd
+/home/user/git/Libraries/range-v3
+# git checkout 4d6a463bca51bc316f9b565edd94e82388206093
 ```
