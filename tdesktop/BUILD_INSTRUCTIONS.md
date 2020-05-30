@@ -48,7 +48,7 @@ libass-dev libfreetype6-dev libgpac-dev libsdl1.2-dev libtheora-dev libtool libv
 libvorbis-dev libxcb1-dev libxcb-image0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb-keysyms1-dev \
 libxcb-icccm4-dev libxcb-render-util0-dev libxcb-util0-dev libxrender-dev libasound-dev libpulse-dev \
 libxcb-sync0-dev libxcb-randr0-dev libx11-xcb-dev libffi-dev libncurses5-dev pkg-config texi2html \
-zlib1g-dev yasm cmake xutils-dev bison python-xcbgen libboost-all-dev
+zlib1g-dev yasm cmake xutils-dev bison python-xcbgen
 
 export MAKE_THREADS_CNT=-j$(nproc)
 
