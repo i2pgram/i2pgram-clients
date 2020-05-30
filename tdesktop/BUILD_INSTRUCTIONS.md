@@ -240,6 +240,11 @@ export HomePath=~/git
 
 echo "building tdesktop"
 cd $HomePath/tdesktop/out/Debug
+```
+
+Add `-lstdc++fs` to link libs of `Telegram`. Then,
+
+```
 make $MAKE_THREADS_CNT
             
 ```
@@ -247,15 +252,4 @@ make $MAKE_THREADS_CNT
 TBD
 
 ```
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y && \
-sudo apt-get update && \
-sudo apt-get install gcc-8 g++-8 -y && \
-sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 60 && \
-sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-8 60 && \
-sudo update-alternatives --config gcc && \
-sudo add-apt-repository --remove ppa:ubuntu-toolchain-r/test -y
-
-# pwd
-/home/user/git/Libraries/range-v3
-# git checkout 4a8d89950cd4474dced5fe209d21810688b1de6f
 ```
