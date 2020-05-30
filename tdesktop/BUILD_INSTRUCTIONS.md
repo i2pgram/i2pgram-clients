@@ -242,7 +242,7 @@ echo "building tdesktop"
 cd $HomePath/tdesktop/out/Debug
 ```
 
-Add `-lstdc++fs` to link libs of `Telegram`. Then,
+Add `-lstdc++fs` to link libs of `Telegram` at `CMakeLists.txt`. Then,
 
 ```
 make $MAKE_THREADS_CNT
