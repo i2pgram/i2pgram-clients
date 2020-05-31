@@ -2,7 +2,7 @@
 
 // These instructions are taken from https://github.com/nebula-chat-fork/clients/blob/master/.github/workflows/tdesktop_linux.yml with modifications from https://github.com/telegramdesktop/tdesktop/blob/dc8abc74ed4d72a73315550b91283ff1f2e44199/docs/building-cmake.md
 
-1. Install Ubuntu 14.04 into virtualbox vm with 300GB storage on disk
+1. Install Ubuntu 14.04 into virtualbox vm with 22GB+ storage on disk
 2. In a terminal,
 
 ```
