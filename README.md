@@ -17,7 +17,8 @@ All client's signIn (signOut) default verify code is *12345*
 **Supported systems:**
 
 * GNU/Linux - [![Build Status](https://github.com/nebula-chat-fork/clients/workflows/tdesktop_linux./badge.svg)](https://github.com/nebula-chat-fork/clients/actions)
- 
+* A built image of i2pgram desktop client for Ubuntu 14.04+: http://mitdpvuagbbk2r6jltj4nz6lurqfwdhxb3wa4jf6nixze2snowdq.b32.i2p/
+
 **Currently unsupported systems:**
 
 * TBD Windows - Build status
@@ -28,3 +29,12 @@ All client's signIn (signOut) default verify code is *12345*
 * TBD FreeBSD
 * TBD Android
 * TBD iOS
+
+**i2pgram Desktop Client**
+
+```
+# ./Telegram --help
+i2pgram.
+options: --dchost= --dcport= --dcpubkey0file= --dcpubkey1file=
+public keys must be in -----BEGIN RSA PUBLIC KEY----- format.
+```
