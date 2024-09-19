@@ -17,7 +17,7 @@ All client's signIn (signOut) default verify code is *12345*
 **Supported systems:**
 
 * GNU/Linux - [![Build Status](https://github.com/nebula-chat-fork/clients/workflows/tdesktop_linux./badge.svg)](https://github.com/nebula-chat-fork/clients/actions)
-* A built image of i2pgram desktop client for Ubuntu 14.04+: http://upvum2vlbkljuvphrremwwlhmypl3te7dr2gyrsw4oady3brhc7q.b32.i2p/
+* A built image of i2pgram desktop client for Ubuntu 14.04+: [pending]
 
 **Currently unsupported systems:**
 
